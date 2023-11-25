@@ -5,23 +5,27 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import orz.springboot.feign.model.OrzFeignRst;
 import orz.springboot.web.model.OrzWebErrorRsp;
-import orz.springboot.web.model.OrzWebErrorTraceT1;
-import orz.springboot.web.model.OrzWebProtocolB1;
+import orz.springboot.web.model.OrzWebErrorTraceTo;
+import orz.springboot.web.model.OrzWebProtocolBo;
 
 import java.util.List;
 
-import static orz.springboot.base.OrzBaseUtils.message;
+import static orz.springboot.base.description.OrzDescriptionUtils.desc;
 
 @Getter
 public class OrzFeignException extends FeignException {
-    private final OrzWebProtocolB1 protocol;
+    private final String method;
+    private final String url;
+    private final OrzWebProtocolBo protocol;
     private final String reason;
-    private final List<OrzWebErrorTraceT1> traces;
+    private final List<OrzWebErrorTraceTo> traces;
     private boolean alarm;
     private boolean logging;
 
-    public OrzFeignException(String method, String url, OrzWebProtocolB1 protocol, OrzWebErrorRsp error) {
-        super(HttpStatus.OK.value(), message(null, "method", method, "url", url, "protocol", protocol, "errorReason", error.getReason()));
+    public OrzFeignException(String method, String url, OrzWebProtocolBo protocol, OrzWebErrorRsp error) {
+        super(HttpStatus.OK.value(), desc(null, "method", method, "url", url, "protocol", protocol, "reason", error.getReason()));
+        this.method = method;
+        this.url = url;
         this.protocol = protocol;
         this.reason = error.getReason();
         this.traces = error.getTraces();

@@ -12,7 +12,7 @@ import orz.springboot.feign.model.OrzFeignRst;
 import orz.springboot.web.OrzWebApiDefinition;
 import orz.springboot.web.OrzWebProps;
 import orz.springboot.web.model.OrzWebErrorRsp;
-import orz.springboot.web.model.OrzWebProtocolB1;
+import orz.springboot.web.model.OrzWebProtocolBo;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
@@ -21,7 +21,7 @@ import java.net.URLDecoder;
 import java.util.Optional;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static orz.springboot.base.OrzBaseUtils.message;
+import static orz.springboot.base.description.OrzDescriptionUtils.desc;
 
 @Slf4j
 public class OrzFeignDecoder implements Decoder {
@@ -68,21 +68,21 @@ public class OrzFeignDecoder implements Decoder {
         return delegate.decode(response, type);
     }
 
-    private Optional<OrzWebProtocolB1> extractProtocol(Response response, String method, String url) {
+    private Optional<OrzWebProtocolBo> extractProtocol(Response response, String method, String url) {
         if (response.status() == HttpStatus.OK.value()) {
             var field = webProps.getResponseHeaders();
             var version = getHeader(response, field.getVersion()).map(Integer::parseInt).orElse(null);
             if (version != null) {
                 if (version < OrzWebApiDefinition.VERSION_MIN) {
-                    var message = message("orz-api version not support", "version", version, "method", method, "url", url);
+                    var message = desc("orz-api version not support", "version", version, "method", method, "url", url);
                     throw new DecodeException(HttpStatus.OK.value(), message, response.request());
                 }
                 var code = getHeader(response, field.getCode()).orElse(null);
                 if (StringUtils.isNotBlank(code)) {
                     String notice = getHeader(response, field.getNotice()).map(s -> URLDecoder.decode(s, UTF_8)).orElse(null);
-                    return Optional.of(OrzWebProtocolB1.error(version, code, notice));
+                    return Optional.of(OrzWebProtocolBo.error(version, code, notice));
                 } else {
-                    return Optional.of(OrzWebProtocolB1.success(version));
+                    return Optional.of(OrzWebProtocolBo.success(version));
                 }
             }
         }
