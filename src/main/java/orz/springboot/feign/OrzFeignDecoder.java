@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import orz.springboot.feign.exception.OrzFeignException;
 import orz.springboot.feign.model.OrzFeignRst;
-import orz.springboot.web.OrzWebApiDefinition;
+import orz.springboot.web.OrzWebConstants;
 import orz.springboot.web.OrzWebProps;
 import orz.springboot.web.model.OrzWebErrorRsp;
 import orz.springboot.web.model.OrzWebProtocolBo;
@@ -73,7 +73,7 @@ public class OrzFeignDecoder implements Decoder {
             var field = webProps.getResponseHeaders();
             var version = getHeader(response, field.getVersion()).map(Integer::parseInt).orElse(null);
             if (version != null) {
-                if (version < OrzWebApiDefinition.VERSION_MIN) {
+                if (version < OrzWebConstants.VERSION_MIN) {
                     var message = desc("orz-api version not support", "version", version, "method", method, "url", url);
                     throw new DecodeException(HttpStatus.OK.value(), message, response.request());
                 }
