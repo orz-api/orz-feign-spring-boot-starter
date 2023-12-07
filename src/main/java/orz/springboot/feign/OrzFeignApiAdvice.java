@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.HandlerMethod;
 import orz.springboot.base.OrzBaseUtils;
-import orz.springboot.feign.exception.OrzFeignException;
 import orz.springboot.web.OrzWebApiHandler;
 import orz.springboot.web.annotation.OrzWebApi;
 

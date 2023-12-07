@@ -1,4 +1,4 @@
-package orz.springboot.feign.exception;
+package orz.springboot.feign;
 
 import feign.FeignException;
 import lombok.Getter;

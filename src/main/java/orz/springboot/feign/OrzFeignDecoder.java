@@ -7,7 +7,6 @@ import feign.codec.Decoder;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
-import orz.springboot.feign.exception.OrzFeignException;
 import orz.springboot.feign.model.OrzFeignRst;
 import orz.springboot.web.OrzWebConstants;
 import orz.springboot.web.OrzWebProps;
