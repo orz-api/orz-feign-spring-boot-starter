@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.HandlerMethod;
 import orz.springboot.base.OrzBaseUtils;
-import orz.springboot.web.OrzWebApiHandler;
+import orz.springboot.web.OrzWebHandler;
 import orz.springboot.web.annotation.OrzWebApi;
 
 import static orz.springboot.alarm.OrzAlarmUtils.alarm;
@@ -15,12 +15,12 @@ import static orz.springboot.base.OrzBaseUtils.hashMap;
 import static orz.springboot.base.description.OrzDescriptionUtils.desc;
 
 @RestControllerAdvice(annotations = {OrzWebApi.class})
-public class OrzFeignApiAdvice {
+public class OrzFeignAdvice {
     private static final Logger logger = LoggerFactory.getLogger("orz-feign-api");
 
-    private final OrzWebApiHandler handler;
+    private final OrzWebHandler handler;
 
-    public OrzFeignApiAdvice(OrzWebApiHandler handler) {
+    public OrzFeignAdvice(OrzWebHandler handler) {
         this.handler = handler;
     }
 
