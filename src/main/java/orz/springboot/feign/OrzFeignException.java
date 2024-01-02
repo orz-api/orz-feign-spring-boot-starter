@@ -47,7 +47,7 @@ public class OrzFeignException extends FeignException {
         return this;
     }
 
-    public boolean codeEquals(String code) {
-        return protocol.codeEquals(code);
+    public boolean is(String code) {
+        return protocol.is(code);
     }
 }
