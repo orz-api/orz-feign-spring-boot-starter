@@ -2,12 +2,12 @@ plugins {
     signing
     `java-library`
     `maven-publish`
-    id("org.springframework.boot") version "3.1.4"
-    id("io.spring.dependency-management") version "1.1.3"
+    id("org.springframework.boot") version "3.3.2"
+    id("io.spring.dependency-management") version "1.1.6"
 }
 
 group = "io.github.orz-api"
-version = "0.0.1-SNAPSHOT"
+version = "0.0.2-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -34,10 +34,10 @@ repositories {
     }
 }
 
-extra["springCloudVersion"] = "2022.0.4"
+extra["springCloudVersion"] = "2023.0.3"
 
 dependencies {
-    api("io.github.orz-api:orz-web-spring-boot-starter:0.0.1-SNAPSHOT")
+    api("io.github.orz-api:orz-web-spring-boot-starter:0.0.2-SNAPSHOT")
     api("org.springframework.cloud:spring-cloud-starter-openfeign")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
